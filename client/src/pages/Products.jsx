@@ -1,7 +1,7 @@
 import useFetchProducts from "../hooks/useFetchProducts";
 import Spinner from "../components/Spinner";
 import ProductCard from "../components/ProductCard";
-import {categories} from "../pages/Admin";
+import {categories} from "./Admin";
 import {useParams} from "react-router";
 
 const Products = () => {

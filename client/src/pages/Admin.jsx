@@ -4,7 +4,7 @@ import {createProduct} from "../api/adminApi";
 export const categories = [
     {label: "Кепове", id: "caps"},
     {label: "Въдици", id: "rods"},
-    {label: "Надуваеми лодки", id: "boats"}
+    {label: "Куки", id: "hooks"}
 ]
 
 const Admin = () => {

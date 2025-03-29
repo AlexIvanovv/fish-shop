@@ -15,7 +15,7 @@ const OrdersTable = ({orders, removeOrder}) => {
             </thead>
             <tbody>
             {orders.map((order, index) => (
-                <tr key={order.id}>
+                <tr key={index}>
                     <th scope="row">{index+1}</th>
                 <td>{order.name}</td>
                 <td>{order.quantity}</td>
