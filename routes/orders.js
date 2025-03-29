@@ -34,7 +34,7 @@ router.get("/", authService.verifyToken, async (req, res) => {
             {$sort: {created_at: -1}},
             {
                 $group: {
-                    _id: "$itemDetails._id",
+                    _id: "$_id",
                     name: {$first: "$itemDetails.title"},
                     quantity: {$sum: "$quantity"},
                     price: {$first: "$itemDetails.price"},
@@ -112,7 +112,7 @@ router.patch("/:id", authService.verifyToken, async (req, res) => {
 
         const collection = await db.collection("orders");
         const result = await collection.updateOne(query, updates);
-        res.send(result).status(200);
+        res.status(200).json(result);
     } catch (err) {
         console.error(err);
         res.status(400).send("Възникна грешка, моля опитайте отново.");

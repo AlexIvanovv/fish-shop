@@ -47,7 +47,14 @@ router.post('/register', async (req, res) => {
                             keys.secretOrKey,
                             {expiresIn: 86400000},
                             (err, token) => {
-                                res.json({success: true, token})
+                                res.json({success: true, token,
+                                    user: {
+                                        email: newUser.email,
+                                        name: newUser.name,
+                                        role: newUser.role,
+                                        id: result.insertedId.valueOf(),
+                                    }
+                                });
                             })
                     })
                 })
@@ -84,7 +91,10 @@ router.post('/login', async (req, res) => {
                         (err, token) => {
                             res.json({
                                 success: true,
-                                token
+                                token,
+                                user: {
+                                    email: existingUser.email,
+                                name: existingUser.name, role: existingUser.role, id: existingUser._id}
                             })
                         })
 
@@ -95,6 +105,23 @@ router.post('/login', async (req, res) => {
             })
     } catch(err) {
         return res.status(400).json({success: false, message: 'Възникна грешка, моля опитайте отново.'})
+    }
+})
+
+//@route GET to api/users
+//@description get user data with JWT token
+//@access Private
+router.get('/', authService.verifyToken, async (req, res) => {
+    const client = req.decoded.user;
+    if (client) {
+        res.status(200).json({
+            id: client._id,
+            email: client.email,
+            name: client.name,
+            role: client.role,
+        });
+    } else {
+        res.status(404).json({})
     }
 })
 

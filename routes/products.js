@@ -67,7 +67,7 @@ router.post("/", authService.verifyToken, async (req, res) => {
         };
         const collection = await db.collection("products");
         const result = await collection.insertOne(newDocument);
-        res.send(result).status(204);
+        res.status(204).json({success: true, result: result});
     } catch (err) {
         console.error(err);
         res.status(400).send("Error adding new product");

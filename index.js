@@ -14,9 +14,9 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json());
-app.use("/users", users);
-app.use("/products", products);
-app.use("/orders", orders);
+app.use("/api/users", users);
+app.use("/api/products", products);
+app.use("/api/orders", orders);
 
 //Passport middleware
 app.use(passport.initialize())

@@ -1,0 +1,21 @@
+.container {
+  min-height: 100%;
+  margin: 0 auto;
+  flex: 1 0 auto;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+ align-items: center;
+  height: 100vh;
+}
+
+.bg-image {
+    width: 100%;
+    height: 100vh;
+   margin: auto;
+    background: url('https://res.cloudinary.com/dr8fiusdr/image/upload/v1742805098/pexels-leonardo-lamas-32247393-7001492_z7iy80.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
