@@ -1,7 +1,7 @@
-const OrdersTable = ({orders}) => {
+const OrdersTable = ({orders, removeOrder}) => {
     const totalPrice = orders.reduce((acc, cur) => acc + cur.total, 0);
-    return (
-        <table className="table">
+
+    return (<table className="table">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -9,6 +9,8 @@ const OrdersTable = ({orders}) => {
                 <th scope="col">Количество</th>
                 <th scope="col">Ед. цена</th>
                 <th scope="col">Сума</th>
+                <th scope="col">
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -19,6 +21,11 @@ const OrdersTable = ({orders}) => {
                 <td>{order.quantity}</td>
                 <td>{order.price} BGN</td>
                     <td>{order.total} BGN</td>
+                    <td>
+                        <button className={'bg-danger text-white'} onClick={async () => await removeOrder(order._id)}>
+                        Изтрий
+                        </button>
+                    </td>
                 </tr>
             ))}
             <tr>

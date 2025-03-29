@@ -19,3 +19,13 @@ export const getUserOrders = async () => {
         return Promise.reject(error);
     }
 }
+
+export const deleteOrder = async (id) => {
+    try {
+        const res =  await app.delete(`api/orders/${id}`);
+        return res.data;
+    } catch (error) {
+        console.error(error)
+        return Promise.reject(error);
+    }
+}

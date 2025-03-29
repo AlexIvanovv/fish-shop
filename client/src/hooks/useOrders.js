@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from "react";
-import {createOrder, getUserOrders} from "../api/ordersApi";
+import {createOrder, deleteOrder, getUserOrders} from "../api/ordersApi";
 
 const useOrders = () => {
     const [orders, setOrders] = useState([]);
@@ -11,6 +11,7 @@ const useOrders = () => {
             setLoading(true)
            const data =  await getUserOrders();
            setOrders(data);
+            document.getElementById('kolichka').innerHTML = data.length;
         } catch (e) {
             setError(e.message);
         } finally {
@@ -33,12 +34,21 @@ const useOrders = () => {
         }
     }
 
+    const removeOrder = async (id) => {
+        try {
+            await deleteOrder(id)
+            await fetchOrders()
+        } catch (error) {
+            setError('Поръчката не може да бъде изтрита. Моля, опитайте по-късно.');
+        }
+    }
+
     useEffect(() => {
         fetchOrders();
     }, []);
 
 
-    return {orders, addNewOrder, fetchOrders, loading, error};
+    return {orders, addNewOrder, removeOrder, fetchOrders, loading, error};
 }
 
 export default useOrders;
