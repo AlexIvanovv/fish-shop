@@ -1,6 +1,7 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
+import keys from "../config/keys.js";
 
-const URI = "mongodb+srv://vesdim2007:GbcYGwMapfre@cluster0.xcuwr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const URI = process.env.NODE_ENV === 'production' ? process.env.MONGO_URI : keys.mongoURI;
 
 const client = new MongoClient(URI, {
     serverApi: {
