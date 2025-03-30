@@ -110,7 +110,8 @@ const Admin = () => {
                 <input className="form-control mb-3" type="url" placeholder="Снимка на продукта" value={imageUrl}
                        onChange={(e) => setImageUrl(e.target.value)} />
                 <span className={'text-danger mb-2'}>{errors.imageUrl}</span>
-                <input className="form-control mb-3" type="number" placeholder="Парола" value={price}
+                <p>Цена:</p>
+                <input className="form-control mb-3" type="number" value={price}
                        onChange={(e) => setPrice(e.target.value)}/>
                 <span className={'text-danger mb-2'}>{errors.price}</span>
                 {error ? <p className={'text-danger mb-2'}>{error}</p> : null}
