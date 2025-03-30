@@ -5,12 +5,14 @@ const useOrders = () => {
     const [orders, setOrders] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [initialLoad, setInitialLoad] = useState(false);
 
     const fetchOrders = useCallback(async () => {
         try {
             setLoading(true)
            const data =  await getUserOrders();
            setOrders(data);
+           setInitialLoad(true);
             document.getElementById('kolichka').innerHTML = data.length;
         } catch (e) {
             setError(e.message);
@@ -23,10 +25,8 @@ const useOrders = () => {
     const addNewOrder = async (data) => {
         setLoading(true);
         try {
-            const newOrder = await createOrder(data);
-            const newOrders = [...orders, {...data, _id: newOrder.insertedIds[0]}]
-            setOrders(newOrders);
-            document.getElementById('kolichka').innerHTML = newOrders.length;
+            await createOrder(data);
+            await fetchOrders();
         } catch (error) {
             setError(error);
         } finally {
@@ -44,8 +44,11 @@ const useOrders = () => {
     }
 
     useEffect(() => {
-        fetchOrders();
-    }, []);
+        const token = localStorage.getItem("token");
+        if (token && !initialLoad) {
+            fetchOrders();
+        }
+    }, [initialLoad]);
 
 
     return {orders, addNewOrder, removeOrder, fetchOrders, loading, error};

@@ -4,7 +4,7 @@ import ProductCard from "../components/ProductCard";
 import {categories} from "./Admin";
 import {useParams} from "react-router";
 
-const Products = () => {
+const Products = ({addNewOrder, orderLoading}) => {
     const params = useParams();
     const {products, loading} = useFetchProducts();
 
@@ -17,7 +17,7 @@ const Products = () => {
     return (<div className="container">
         <h3 className={'text-center mb-5 mt-5'}>Всички продукти от категория {category.label || ''} </h3>
         <div className="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-            {products.map((product, index) => (<div className={'col'} key={index}><ProductCard {...product} /></div>))}
+            {products.map((product, index) => (<div className={'col'} key={index}><ProductCard product={product} addNewOrder={addNewOrder} laoding={orderLoading}/></div>))}
         </div>
     </div>)
 }

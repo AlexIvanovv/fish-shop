@@ -2,11 +2,9 @@ import Logo from '../assets/logo192.svg';
 import Kolichka from '../assets/kolichka.svg';
 import {Link, NavLink, useLocation, useNavigate} from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
-import useOrders from "../hooks/useOrders";
 
-const Navbar = ({categories}) => {
+const Navbar = ({categories, ordersCount}) => {
     const {user} = useAuthUser();
-    const {orders} = useOrders();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -49,7 +47,7 @@ const Navbar = ({categories}) => {
                         <li className={'nav-item'}>
                             {user ? <NavLink className={'nav-link mr-2'} active={location.pathname === '/orders'} to={'/orders'} >
                                 <img width={30} height={30} src={Kolichka} alt='kolichka' />
-                                <span id="kolichka" className="badge badge-pill badge-light">{orders.length}</span>
+                                <span id="kolichka" className="badge badge-pill badge-light">{ordersCount}</span>
                             </NavLink> : <NavLink className={'nav-link'} active={location.pathname === '/login'} to={'/login'}>Вход</NavLink>}
                         </li>
                         <li>

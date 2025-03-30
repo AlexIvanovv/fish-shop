@@ -1,9 +1,6 @@
 import OrdersTable from "../components/OrdersTable";
-import useOrders from "../hooks/useOrders";
 
-const Orders = () => {
-
-    const {orders, error, removeOrder} = useOrders();
+const Orders = ({orders, removeOrder, error}) => {
 
     return <div>
         <h3 className={'text-center mb-5 mt-5'}>Вашите поръчки</h3>

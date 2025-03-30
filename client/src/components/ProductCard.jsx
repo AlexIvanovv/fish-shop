@@ -1,9 +1,7 @@
 import {useState} from "react";
-import useOrders from "../hooks/useOrders";
 
-const ProductCard = (product) => {
-    const {loading, error, addNewOrder} = useOrders();
-    const {title, description, price, image, sku} = product;
+const ProductCard = ({product, loading, addNewOrder}) => {
+    const {title, description, price, image, sku} = product || {};
     const [qty, setQty] = useState(0);
     const [displayFullText, setDisplayFullText] = useState(false);
 
@@ -23,7 +21,7 @@ const ProductCard = (product) => {
             <div className="card-body" style={displayFullText ? {} : {height: '200px'}}>
                 <h5 className="card-title">{title}</h5>
                 <span className="card-text mr-2">{displayFullText ? description : `${description.slice(0, 100)}...`}</span>
-                    <a className='text-secondary' style={{cursor: 'pointer'}} onClick={toggleTextDisplay}>
+                    <a className='text-secondary' href='#' style={{cursor: 'pointer'}} onClick={toggleTextDisplay}>
                         {!displayFullText ? "Повече" : "По-малко"}
                     </a>
             </div>
